@@ -1,21 +1,28 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 var notes = [
-  'http REALLY is a protocol',
-  'http requests have a URL, method, header and body',
-  'Is this seriously working?',
-  'Yes it appears to be'
+  'These notes come from the array',
+  "Then they're rendered through the EJS file",
+  "And finally they're delivered over http"
 ];
-var fruits = ['apple', 'pear', 'banana', 'kumquat'];
 
+// bodyParser helps with parsing user input
 app.use(bodyParser.urlencoded({ extended: true }));
+// Specify a static CSS file to add styling
 app.use('/css', express.static('css'));
-// app.get('/', (req, res) => res.send('<h2>Web Notepad Server</h2>'))
-// app.use('/', express.static('views'));
+// Tell Morgan to make a tiny log file with only most-important things
+app.use(morgan('tiny'));
+
 app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
   res.render('notes', { notes: notes });
+});
+app.delete('/notes/:id', (req, res) => {
+  notes.splice('req.params.id', 1);
+  res.send('***ITEM DELETED***');
+  res.redirect('/');
 });
 app.post('/notes', (req, res) => { 
   notes.push(req.body.note);
