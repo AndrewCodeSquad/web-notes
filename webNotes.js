@@ -19,10 +19,21 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
   res.render('notes', { notes: notes });
 });
+app.put('/notes/:id', function (req, res){
+  if(req.params.id >= 0 && req.params.id < notes.length){
+    notes[req.params.id] = req.body.note;
+  } else {
+    res.status(404).send("***NOTE DOES NOT EXIST***");
+  }
+});
 app.delete('/notes/:id', (req, res) => {
-  notes.splice('req.params.id', 1);
-  res.send('***ITEM DELETED***');
-  res.redirect('/');
+  if(req.params.id >= 0 && req.params.id < notes.length){
+    notes.splice('req.params.id', 1);
+    res.send('***NOTE DELETED***');
+    res.redirect('/');
+  } else {
+    res.status(404).send("***NOTE DOES NOT EXIST***");
+  }
 });
 app.post('/notes', (req, res) => { 
   notes.push(req.body.note);
