@@ -6,10 +6,12 @@
   </head>
   <body>
     <header>
+      <div id="div1">
         <h1>Notes App</h1>
         <p>This is a place where I can store my class notes.</p>
+      </div>
     </header>
-
+<!--     <button onclick="newHeadline()">Change header</button> -->
     <% for(let i = 0; i < notes.length; i++) { %>
       <div class="card">
         <div class="card-header">
@@ -17,13 +19,17 @@
         </div>
         <div class="card-body">
           <%= notes[i] %>
+          <button onclick="deleteNote(<%= i %>)" class="btn-danger floatRight">Delete</button>
         </div>
       </div>
-    <% } %>  
+<% } %>  
     <form action="/notes" method="post">
       <input type="text" size='50' name="note" id="">
 <!--       <textarea name="note" id="" cols="30" rows="10"></textarea> -->
       <input type="submit" value="Save" />
     </form>
+    <button onclick='sendAlert()'>Test</button>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
+    <script src="js/customJS.js"></script>
   </body>
 </html>

@@ -6,6 +6,10 @@ body {
   margin-top: 30px;
 }
 
+.floatRight {
+  float: right;
+}
+
 header {
   background-color: #c5e6ef;
   background-image: url(https://lh3.ggpht.com/bheuhKKEmExpdeuE0muihqWCzzSXLfHWbBbYl7MfYYzaol3BKLs3MAu61g2ig3cHNh4=s180);
